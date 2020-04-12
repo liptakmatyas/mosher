@@ -1,0 +1,25 @@
+adm = Avidemux()
+
+{% for video in input_videos %}
+{%- if loop.first %}
+adm.loadVideo("{{ video }}")
+{%- else -%}
+adm.appendVideo("{{ video }}")
+{%- endif %}
+{% endfor %}
+
+adm.clearSegments()
+{%- for seg in segments %}
+adm.addSegment({{ seg['video_idx'] }}, {{ seg['start_us'] }}, {{ seg['duration_us'] }})
+{%- endfor %}
+
+
+adm.markerA = 0
+adm.markerB = {{ total_duration_us }}
+adm.setPostProc(3, 3, 0)
+adm.videoCodec("Copy")
+adm.audioClearTracks()
+adm.setContainer("AVI", "odmlType=0")
+
+adm.save("{{ output_path }}")
+
