@@ -9,3 +9,6 @@ test:
 	pip install -e .
 	pytest
 
+todo:
+	@git grep -qnP 'TODO|FIXME' | grep -qv 'THIS_EXACT_LINE_RIGHT_HERE' || true
+
