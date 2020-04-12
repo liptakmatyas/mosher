@@ -28,9 +28,6 @@ import subprocess
 import mosher
 
 
-#   TODO    --plugin PLUGIN ==> importlib.import_module('mosher.plugin.PLUGIN')
-
-
 def main(args):
     video = [mosher.Video(video_idx, input_file)
              for video_idx, input_file in enumerate(args['--video'])]
